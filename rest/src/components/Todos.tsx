@@ -13,7 +13,10 @@ function Todos() {
     useEffect(() => {
         console.log('Effect')
         fetchTodos()
-            .then(() => console.log('Fetched'))
+            .then((todos) => {
+                console.log('fetched')
+                setData(todos)
+            })
     }, [])
 
     return (
@@ -30,10 +33,10 @@ function Todos() {
 
 }
 
-function fetchTodos(){
+function fetchTodos(): Promise<TodoDto[]> {
     const URI = 'https://jsonplaceholder.typicode.com/todos';
     return fetch(URI)
-        .then(response => console.log(response))
+        .then(response => response.json())
 
 }
 
